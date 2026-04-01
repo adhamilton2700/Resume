@@ -7,7 +7,7 @@
     <style>
         :root {
             --au-green: #006b3f; /* Asia University Inspired Green */
-            --dark-slate: #2c3e50;
+            --dark-grey: #2f373f;
             --light-gray: #f4f7f6;
             --accent: #e67e22;
         }
@@ -28,33 +28,73 @@
 
         .resume-paper {
             background: white;
-            width: 210mm; /* A4 Width */
-            min-height: 297mm; /* A4 Height */
-            display: grid;
-            grid-template-columns: 280px 1fr;
+            width: 210mm;
+            min-height: 297mm;
             box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Sidebar Section */
-        .sidebar {
-            background-color: var(--dark-slate);
+        /* Unified Dark Grey Header Section */
+        .unified-header {
+            background-color: var(--dark-grey);
             color: white;
-            padding: 40px 30px;
+            padding: 40px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .profile-header {
+        .header-left h1 {
+            font-size: 3rem;
+            color: white;
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+
+        .header-left p {
+            color: var(--au-green);
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .header-right {
             text-align: center;
-            margin-bottom: 40px;
+        }
+
+        /* Circular Photo Crop */
+        .profile-photo {
+            width: 110px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid white;
+            margin-bottom: 10px;
         }
 
         .id-badge {
             background: var(--au-green);
-            padding: 5px 10px;
+            padding: 5px 12px;
             border-radius: 4px;
             font-size: 0.8rem;
             display: inline-block;
-            margin-top: 10px;
             letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        /* Two-Column Layout for Body Content */
+        .content-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            flex-grow: 1;
+        }
+
+        /* Sidebar Section */
+        .sidebar {
+            background-color: #34495e; /* Slightly lighter than header for depth */
+            color: white;
+            padding: 40px 30px;
         }
 
         .side-section { margin-bottom: 35px; }
@@ -82,29 +122,16 @@
             color: #333;
         }
 
-        .name-banner h1 {
-            font-size: 3rem;
-            color: var(--dark-slate);
-            letter-spacing: -1px;
-        }
-
-        .name-banner p {
-            color: var(--au-green);
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-        }
-
         .content-section { margin-bottom: 40px; }
         .content-section h2 {
             font-size: 1.4rem;
-            color: var(--dark-slate);
+            color: var(--dark-grey);
             border-left: 5px solid var(--au-green);
             padding-left: 15px;
             margin-bottom: 20px;
         }
 
-        .entry { margin-bottom: 20px; position: relative; }
+        .entry { margin-bottom: 20px; }
         .entry h4 { font-size: 1.1rem; color: #444; }
         .entry .meta { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 5px; }
 
@@ -139,97 +166,97 @@
     </div>
 
     <div class="resume-paper">
-        <aside class="sidebar">
-            <div class="profile-header">
-                <img src="rp.jpeg" alt="A.H photo" width="96" height="100">
-                <div class="id-badge"> Student ID: 114021142</div>
-            </div>
-
-            <div class="side-section">
-                <h3>Contact</h3>
-                <p style="font-size: 0.9rem; line-height: 2;">
-                    📍 Taichung, Taiwan<br>
-                    📧 adhamilton2700@gmail.com<br>
-                    🌐 github.com/adhamilton2700
-                </p>
-            </div>
-
-            <div class="side-section">
-                <h3>Core Languages</h3>
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">C++</span>
-            </div>
-
-            <div class="side-section">
-                <h3>Infrastructure</h3>
-                <span class="skill-tag">Hardware Diagnostics</span>
-                <span class="skill-tag">Network Basics</span>
-            </div>
-
-            <div class="side-section">
-                <h3>Productivity</h3>
-                <span class="skill-tag">Microsoft 365</span>
-                <span class="skill-tag">VS Code</span>
-            </div>
-        </aside>
-
-        <main class="main">
-            <header class="name-banner">
+        <header class="unified-header">
+            <div class="header-left">
                 <h1 id="user-name">Andrew Hamilton</h1>
                 <p>Computer Science & Information Technology Student</p>
-            </header>
+            </div>
+            <div class="header-right">
+                <img src="rp.jpeg" alt="A.H photo" class="profile-photo">
+                <br>
+                <div class="id-badge">STUDENT ID: 114021142</div>
+            </div>
+        </header>
 
-            <section class="content-section">
-                <h2>Education</h2>
-                <div class="entry">
-                    <h4>Asia University, Taichung</h4>
-                    <div class="meta">B.S. in Computer Science | 2025 - 2029 (Expected)</div>
-                    <p>Focusing on foundational software engineering, algorithm design, and systems architecture.</p>
+        <div class="content-layout">
+            <aside class="sidebar">
+                <div class="side-section">
+                    <h3>Contact</h3>
+                    <p style="font-size: 0.9rem; line-height: 2;">
+                        📍 Taichung, Taiwan<br>
+                        📧 adhamilton2700@gmail.com<br>
+                        🌐 github.com/adhamilton2700
+                    </p>
                 </div>
-            </section>
 
-            <section class="content-section">
-                <h2>Technical Profile</h2>
-                <div class="entry">
-                    <p>Basic skills using <strong>low-level programming (C++)</strong> and <strong>scripting (Python)</strong>. Possess a solid grasp of physical computer architecture, from component assembly to network layer fundamentals.</p>
+                <div class="side-section">
+                    <h3>Core Languages</h3>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">C++</span>
                 </div>
-            </section>
 
-            <section class="content-section">
-                <h2>Academic Focus & Projects</h2>
-                <div class="entry">
-                    <h4>Systems Exploration</h4>
-                    <div class="meta">Independent Study</div>
-                    <ul style="margin-left: 20px;">
-                        <li>Developing command-line utilities in Python.</li>
-                        <li>Exploring memory management and data structures in C++.</li>
-                        <li>Building and optimizing custom PC hardware configurations.</li>
-                    </ul>
+                <div class="side-section">
+                    <h3>Infrastructure</h3>
+                    <span class="skill-tag">Hardware Diagnostics</span>
+                    <span class="skill-tag">Network Basics</span>
                 </div>
-            </section>
 
-            <section class="content-section">
-                <h2>Goals</h2>
-                <div class="entry">
-                    <p>Seeking internship opportunities for Summer 2026 and part time work to apply hardware knowledge and growing programming proficiency in a real-world enterprise environment.</p>
+                <div class="side-section">
+                    <h3>Productivity</h3>
+                    <span class="skill-tag">Microsoft 365</span>
+                    <span class="skill-tag">VS Code</span>
                 </div>
-            </section>
-        </main>
+            </aside>
+
+            <main class="main">
+                <section class="content-section">
+                    <h2>Education</h2>
+                    <div class="entry">
+                        <h4>Asia University, Taichung</h4>
+                        <div class="meta">B.S. in Computer Science | 2025 - 2029 (Expected)</div>
+                        <p>Focusing on foundational software engineering, algorithm design, and systems architecture.</p>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2>Technical Profile</h2>
+                    <div class="entry">
+                        <p>Basic skills using <strong>low-level programming (C++)</strong> and <strong>scripting (Python)</strong>. Possess a solid grasp of physical computer architecture, from component assembly to network layer fundamentals.</p>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2>Academic Focus & Projects</h2>
+                    <div class="entry">
+                        <h4>Systems Exploration</h4>
+                        <div class="meta">Independent Study</div>
+                        <ul style="margin-left: 20px;">
+                            <li>Developing command-line utilities in Python.</li>
+                            <li>Exploring memory management and data structures in C++.</li>
+                            <li>Building and optimizing custom PC hardware configurations.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2>Goals</h2>
+                    <div class="entry">
+                        <p>Seeking internship opportunities for Summer 2026 and part time work to apply hardware knowledge and growing programming proficiency in a real-world enterprise environment.</p>
+                    </div>
+                </section>
+            </main>
+        </div>
     </div>
 
     <script>
-        // Interactive "Live Edit" - Click any text to change it!
         document.addEventListener('DOMContentLoaded', () => {
             const editableElements = ['h1', 'h2', 'h3', 'h4', 'p', 'span', 'li'];
-            
             editableElements.forEach(tag => {
                 document.querySelectorAll(tag).forEach(el => {
                     el.contentEditable = true;
                     el.title = "Click to edit";
                 });
             });
-
-            console.log("Resume Initialized. All text fields are now editable.");
         });
     </script>
 </body>
