@@ -57,11 +57,11 @@
             transform: scale(1.05);
         }
 
-        .music-btn {
+        .mute-btn {
             border-color: var(--accent);
         }
 
-        .music-btn:hover {
+        .mute-btn:hover {
             background: var(--accent);
         }
 
@@ -176,7 +176,6 @@
             .resume-paper { box-shadow: none; width: 100%; }
         }
 
-        /* Responsive adjustment for small screens */
         @media (max-width: 1200px) {
             .external-controls {
                 position: static;
@@ -193,9 +192,9 @@
 <body>
 
     <div class="external-controls">
-        <button id="musicToggle" class="ctrl-btn music-btn">▶ Play Music</button>
+        <button id="muteToggle" class="ctrl-btn mute-btn">🔊 Unmute Music</button>
         <button class="ctrl-btn" onclick="window.print()">Download PDF</button>
-        <audio id="bgMusic" loop>
+        <audio id="bgMusic" loop autoplay muted>
             <source src="music.mp3" type="audio/mpeg">
         </audio>
     </div>
@@ -285,21 +284,28 @@
     </div>
 
     <script>
-        // Music Control Script
         const music = document.getElementById('bgMusic');
-        const btn = document.getElementById('musicToggle');
+        const btn = document.getElementById('muteToggle');
+
+        // Initial attempt to play (some browsers allow muted autoplay)
+        window.addEventListener('load', () => {
+            music.play().catch(error => {
+                console.log("Autoplay prevented. Waiting for interaction.");
+            });
+        });
 
         btn.addEventListener('click', () => {
-            if (music.paused) {
+            if (music.muted) {
+                music.muted = false;
+                btn.innerText = "🔇 Mute Music";
+                // Ensure it plays if autoplay was blocked
                 music.play();
-                btn.innerText = "⏸ Pause Music";
             } else {
-                music.pause();
-                btn.innerText = "▶ Play Music";
+                music.muted = true;
+                btn.innerText = "🔊 Unmute Music";
             }
         });
 
-        // Editability Script
         document.addEventListener('DOMContentLoaded', () => {
             const editableElements = ['h1', 'h2', 'h3', 'h4', 'p', 'span', 'li'];
             editableElements.forEach(tag => {
