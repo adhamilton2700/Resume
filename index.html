@@ -6,7 +6,7 @@
     <title>Resume - Andrew Hamilton</title>
     <style>
         :root {
-            --au-green: #006b3f; /* Asia University Inspired Green */
+            --au-green: #006b3f; 
             --dark-grey: #2f373f;
             --light-gray: #f4f7f6;
             --accent: #e67e22;
@@ -26,6 +26,46 @@
             padding: 50px 20px;
         }
 
+        /* Fixed Sidebar Control Panel */
+        .external-controls {
+            position: fixed;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .ctrl-btn {
+            background: var(--dark-grey);
+            color: white;
+            border: 2px solid var(--au-green);
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .ctrl-btn:hover {
+            background: var(--au-green);
+            transform: scale(1.05);
+        }
+
+        .music-btn {
+            border-color: var(--accent);
+        }
+
+        .music-btn:hover {
+            background: var(--accent);
+        }
+
+        /* Resume Sheet */
         .resume-paper {
             background: white;
             width: 210mm;
@@ -35,7 +75,6 @@
             flex-direction: column;
         }
 
-        /* Unified Dark Grey Header Section */
         .unified-header {
             background-color: var(--dark-grey);
             color: white;
@@ -63,7 +102,6 @@
             text-align: center;
         }
 
-        /* Circular Photo Crop */
         .profile-photo {
             width: 110px;
             height: 110px;
@@ -83,16 +121,14 @@
             font-weight: bold;
         }
 
-        /* Two-Column Layout for Body Content */
         .content-layout {
             display: grid;
             grid-template-columns: 280px 1fr;
             flex-grow: 1;
         }
 
-        /* Sidebar Section */
         .sidebar {
-            background-color: #34495e; /* Slightly lighter than header for depth */
+            background-color: #34495e;
             color: white;
             padding: 40px 30px;
         }
@@ -116,7 +152,6 @@
             font-size: 0.85rem;
         }
 
-        /* Main Content Section */
         .main {
             padding: 50px;
             color: #333;
@@ -135,46 +170,46 @@
         .entry h4 { font-size: 1.1rem; color: #444; }
         .entry .meta { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 5px; }
 
-        .btn-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-        }
-
-        button {
-            background: var(--au-green);
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            font-weight: bold;
-        }
-
         @media print {
-            .btn-container { display: none; }
+            .external-controls { display: none; }
             body { padding: 0; background: white; }
             .resume-paper { box-shadow: none; width: 100%; }
+        }
+
+        /* Responsive adjustment for small screens */
+        @media (max-width: 1200px) {
+            .external-controls {
+                position: static;
+                transform: none;
+                flex-direction: row;
+                justify-content: center;
+                margin-bottom: 20px;
+                width: 100%;
+            }
+            body { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
 <body>
 
-    <div class="btn-container">
-        <button onclick="window.print()">Download as PDF</button>
+    <div class="external-controls">
+        <button id="musicToggle" class="ctrl-btn music-btn">▶ Play Music</button>
+        <button class="ctrl-btn" onclick="window.print()">Download PDF</button>
+        <audio id="bgMusic" loop>
+            <source src="music.mp3" type="audio/mpeg">
+        </audio>
     </div>
 
     <div class="resume-paper">
         <header class="unified-header">
             <div class="header-left">
-                <h1 id="user-name">Andrew Hamilton</h1>
-                <p>Computer Science & Information Technology Student</p>
+                <h1>Andrew Hamilton</h1>
+                <p>Computer Science Student | Asia University</p>
             </div>
             <div class="header-right">
                 <img src="rp.jpeg" alt="A.H photo" class="profile-photo">
                 <br>
-                <div class="id-badge">STUDENT ID: 114021142</div>
+                <div class="id-badge">STUDENT ID: 11421142</div>
             </div>
         </header>
 
@@ -190,7 +225,7 @@
                 </div>
 
                 <div class="side-section">
-                    <h3>Core Languages</h3>
+                    <h3>Programming</h3>
                     <span class="skill-tag">Python</span>
                     <span class="skill-tag">C++</span>
                 </div>
@@ -202,9 +237,10 @@
                 </div>
 
                 <div class="side-section">
-                    <h3>Productivity</h3>
-                    <span class="skill-tag">Microsoft 365</span>
+                    <h3>Tools</h3>
                     <span class="skill-tag">VS Code</span>
+                    <span class="skill-tag">Microsoft 365</span>
+                    <span class="skill-tag">Git</span>
                 </div>
             </aside>
 
@@ -214,34 +250,34 @@
                     <div class="entry">
                         <h4>Asia University, Taichung</h4>
                         <div class="meta">B.S. in Computer Science | 2025 - 2029 (Expected)</div>
-                        <p>Focusing on foundational software engineering, algorithm design, and systems architecture.</p>
+                        <p>Focusing on software engineering, algorithm design, and system logic.</p>
                     </div>
                 </section>
 
                 <section class="content-section">
                     <h2>Technical Profile</h2>
                     <div class="entry">
-                        <p>Basic skills using <strong>low-level programming (C++)</strong> and <strong>scripting (Python)</strong>. Possess a solid grasp of physical computer architecture, from component assembly to network layer fundamentals.</p>
+                        <p>Foundation in <strong>low-level programming (C++)</strong> and <strong>automation scripting (Python)</strong>. Hands-on experience with physical computer architecture and hardware optimization.</p>
                     </div>
                 </section>
 
                 <section class="content-section">
-                    <h2>Academic Focus & Projects</h2>
+                    <h2>Hardware & Systems</h2>
                     <div class="entry">
                         <h4>Systems Exploration</h4>
                         <div class="meta">Independent Study</div>
                         <ul style="margin-left: 20px;">
-                            <li>Developing command-line utilities in Python.</li>
-                            <li>Exploring memory management and data structures in C++.</li>
                             <li>Building and optimizing custom PC hardware configurations.</li>
+                            <li>Analyzing hardware performance and thermal management.</li>
+                            <li>Developing memory-efficient scripts for system monitoring.</li>
                         </ul>
                     </div>
                 </section>
 
                 <section class="content-section">
-                    <h2>Goals</h2>
+                    <h2>Professional Goals</h2>
                     <div class="entry">
-                        <p>Seeking internship opportunities for Summer 2026 and part time work to apply hardware knowledge and growing programming proficiency in a real-world enterprise environment.</p>
+                        <p>Seeking to apply technical knowledge of hardware and growing programming proficiency in an enterprise or research environment.</p>
                     </div>
                 </section>
             </main>
@@ -249,6 +285,21 @@
     </div>
 
     <script>
+        // Music Control Script
+        const music = document.getElementById('bgMusic');
+        const btn = document.getElementById('musicToggle');
+
+        btn.addEventListener('click', () => {
+            if (music.paused) {
+                music.play();
+                btn.innerText = "⏸ Pause Music";
+            } else {
+                music.pause();
+                btn.innerText = "▶ Play Music";
+            }
+        });
+
+        // Editability Script
         document.addEventListener('DOMContentLoaded', () => {
             const editableElements = ['h1', 'h2', 'h3', 'h4', 'p', 'span', 'li'];
             editableElements.forEach(tag => {
