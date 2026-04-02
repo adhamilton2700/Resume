@@ -26,35 +26,37 @@
             padding: 50px 20px;
         }
 
-        /* Fixed Sidebar Control Panel */
+        /* Minimalist Icon Control Panel */
         .external-controls {
             position: fixed;
-            left: 30px;
+            left: 40px;
             top: 50%;
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
             z-index: 1000;
         }
 
-        .ctrl-btn {
+        .icon-btn {
             background: var(--dark-grey);
             color: white;
             border: 2px solid var(--au-green);
-            padding: 12px 20px;
-            border-radius: 8px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             cursor: pointer;
-            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-            min-width: 150px;
-            text-align: center;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .ctrl-btn:hover {
+        .icon-btn:hover {
             background: var(--au-green);
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .mute-btn {
@@ -192,8 +194,9 @@
 <body>
 
     <div class="external-controls">
-        <button id="muteToggle" class="ctrl-btn mute-btn">🔊 Unmute Music</button>
-        <button class="ctrl-btn" onclick="window.print()">Download PDF</button>
+        <button id="muteToggle" class="icon-btn mute-btn" title="Unmute Music">🔇</button>
+        <button class="icon-btn" onclick="window.print()" title="Download PDF">🖨️</button>
+        
         <audio id="bgMusic" loop autoplay muted>
             <source src="music.mp3" type="audio/mpeg">
         </audio>
@@ -287,22 +290,16 @@
         const music = document.getElementById('bgMusic');
         const btn = document.getElementById('muteToggle');
 
-        // Initial attempt to play (some browsers allow muted autoplay)
-        window.addEventListener('load', () => {
-            music.play().catch(error => {
-                console.log("Autoplay prevented. Waiting for interaction.");
-            });
-        });
-
         btn.addEventListener('click', () => {
             if (music.muted) {
                 music.muted = false;
-                btn.innerText = "🔇 Mute Music";
-                // Ensure it plays if autoplay was blocked
+                btn.innerText = "🔊"; // Changed icon to 'sound on'
+                btn.title = "Mute Music";
                 music.play();
             } else {
                 music.muted = true;
-                btn.innerText = "🔊 Unmute Music";
+                btn.innerText = "🔇"; // Changed icon to 'sound off'
+                btn.title = "Unmute Music";
             }
         });
 
